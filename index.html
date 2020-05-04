@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导航条</title>
+    <style>
+        body,ul,li,a{
+            margin: 0;
+            padding:0;
+            margin:  0 auto;
+        }
+        li{
+            list-style: none;
+        }
+        .headerList ul{
+            width: 500px;
+            margin: 10px;
+        }
+        .headerList li{
+            width: 100px;
+            height: 50px;
+            list-style: none;
+            background-color:#aaa;
+            font-size: 18px;
+            margin: 0 2px;
+            color: #fff;
+            float: left;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .container .active{
+            background-color: rgb(119, 209, 46);
+            color:red;  
+            font-size: 25px;
+        }
+        /* 用伪元素清理浮动 */
+        /* .container::after{
+            content: "";
+            display:block ;
+            clear: both;
+        } */
+
+     /* 此方法用伪元素清理浮动,又解决margin的问题 */
+        .container::before,.container::after{
+            content: "";
+            display: table;
+        }
+        .container::after{
+            clear: both;
+        }
+        .commodityBox{
+            margin-left: 20px;
+        }
+        .commodityBox ul{
+            display: none;
+
+        }
+        .commodityBox .active{
+            display: block;
+        }
+        .imgbox{
+            font-size: 0;
+            width: 400px;
+            height: 300px;
+            line-height: 300px;
+            text-align: center;
+        }
+        .imgbox img{
+            max-height: 100%;
+            max-width: 100%;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="headerList">
+        <ul class="container" id="tabs">
+            <li class="active">家电</li>
+            <li>服装</li>
+            <li>百货</li>
+            <li>手机</li>
+        </ul>
+    </div>
+    <div class="commodityBox clearfix" id="lists">
+        <ul class=" active">
+            <li>
+                <div class="imgbox"><img src="./img/1.jpg" alt=""></div>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <div class="imgbox"><img src="./img/2.jpg" alt=""></div>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <div class="imgbox"><img src="./img/3.jpg" alt=""></div>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <div class="imgbox"><img src="./img/4.jpg" alt=""></div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var tabs =document.getElementById("tabs").getElementsByTagName("li");
+        var lists =document.getElementById('lists').getElementsByTagName('ul');
+        console.log(tabs)
+        console.log(lists)
+        
+        for (var i =0;i<tabs.length; i++){
+            tabs[i].onclick = showlist;
+        }
+        function showlist(){
+            for(var e =0;e<tabs.length;e++){
+                if(tabs[e] === this){
+                    tabs[e].className = "active";
+                    lists[e].className = "active"    
+                }
+                else{
+                    tabs[e].className = "";
+                    lists[e].className ="";
+        
+                } 
+            }
+        }
+
+    </script>
+</body>
+
+</html>
